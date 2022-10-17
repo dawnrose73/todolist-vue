@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    background-image: -webkit-gradient(linear, left top, left bottom, from($backgroundColor1), to($backgroundColor2));
+    background-image: linear-gradient(180deg, $backgroundColor1, $backgroundColor2);
+    color: $mainColor;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    min-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+button, input {
+    outline: none;
+    border: none;
+}
+
+.fas {
+    pointer-events: none;
+}
+
+button {
+    cursor: pointer;
+}

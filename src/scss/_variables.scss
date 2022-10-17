@@ -1,0 +1,15 @@
+$backgroundColor1: #f6d365;
+$backgroundColor2: #fda085;
+$mainColor: #ffffff;
+$textColor: #000000;
+$addBtnColor: #d88771;
+$deleteColor: #ff6f47;
+$completeColor: #1bc23f;
+$editColor: #f2c541;
+
+@mixin baseBtnStyles {
+    font-size: 1rem;
+    padding: 1rem;
+    color: $mainColor;
+    min-width: 50px;
+}

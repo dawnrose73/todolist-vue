@@ -6,10 +6,15 @@
     </button>
 </template>
 
-<script>
-export default {
-    props: ['todo']
-}
+<script lang="ts">
+import { Todo } from "@/types/todo";
+import Vue, { PropType } from "vue";
+
+export default Vue.extend({
+    props: {
+        todo: Object as PropType<Todo>
+    }
+})
 </script>
 
 <style lang="scss">

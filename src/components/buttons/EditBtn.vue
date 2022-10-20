@@ -12,20 +12,28 @@
     </button>
 </template>
 
-<script>
-export default {
-    props: ['todo', 'task', 'isEdit'],
+<script lang="ts">
+import { Todo } from "@/types/todo";
+import { TodoEditData } from "@/types/todoEditData";
+import Vue, { PropType } from "vue";
+
+export default Vue.extend({
+    props: {
+        todo: Object as PropType<Todo>, 
+        task: String as PropType<string>, 
+        isEdit: Boolean as PropType<boolean>
+    },
     methods: {
-        edit(task, id) {
+        edit(task: string, id: number) {
             if (this.isEdit) {
-                const taskToEdit = {task, id};
+                const taskToEdit = {task, id} as TodoEditData;
                 this.$emit('edit-todo', taskToEdit);
             } else {
                 this.$emit('toggle-edit-mode');
             }
         }
     }
-}
+})
 </script>
 
 <style lang="scss">

@@ -13,26 +13,31 @@
     </div>
 </template>
 
-<script>
-import TodoItem from "@/components/TodoItem";
+<script lang="ts">
+import Vue, { PropType } from "vue";
+import TodoItem from "@/components/TodoItem.vue";
+import { Todo } from "@/types/todo";
+import { TodoEditData } from "@/types/todoEditData";
 
-export default {
-    props: ['todos'],
+export default Vue.extend({
+    props: {
+        todos: Array as PropType<Todo[]>
+    },
     components: {
         TodoItem
     },
     methods: {
-        completeTodo(todo) {
+        completeTodo(todo: Todo) {
            this.$emit('complete-todo', todo);
         },
-        removeTodo(id) {
+        removeTodo(id: number) {
            this.$emit('remove-todo', id);
         },
-        editTodo(taskToEdit) {
+        editTodo(taskToEdit: TodoEditData) {
             this.$emit('edit-todo', taskToEdit);
         },
     }
-}
+})
 </script>
 
 <style lang="scss">

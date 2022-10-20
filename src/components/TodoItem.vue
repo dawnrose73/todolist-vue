@@ -28,13 +28,18 @@
     </li>
 </template>
 
-<script>
-import CompleteBtn from "@/components/buttons/CompleteBtn";
-import EditBtn from "@/components/buttons/EditBtn";
-import DeleteBtn from "@/components/buttons/DeleteBtn";
+<script lang="ts">
+import Vue, { PropType } from "vue";
+import CompleteBtn from "@/components/buttons/CompleteBtn.vue";
+import EditBtn from "@/components/buttons/EditBtn.vue";
+import DeleteBtn from "@/components/buttons/DeleteBtn.vue";
+import { Todo } from "@/types/todo";
+import { TodoEditData } from "@/types/todoEditData";
 
-export default {
-    props: ['todo'],
+export default Vue.extend({
+    props: {
+        todo: Object as PropType<Todo>
+    },
     data() {
         return {
             isEdit: false,
@@ -46,22 +51,22 @@ export default {
         CompleteBtn, EditBtn, DeleteBtn
     },
     methods: {
-        editTodo(taskToEdit) {
+        editTodo(taskToEdit: TodoEditData) {
             this.$emit('edit-todo', taskToEdit);
             this.toggleEditMode();
 
         },
-        completeTodo(todo) {
+        completeTodo(todo: Todo) {
            this.$emit('complete-todo', todo);
         },
-        removeTodo(id) {
+        removeTodo(id: number) {
            this.$emit('remove-todo', id);
         },
         toggleEditMode() {
             this.isEdit = !this.isEdit;
         }
     }
-}
+})
 </script>
 
 <style lang="scss">

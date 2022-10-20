@@ -1,34 +1,61 @@
 <template>
   <div id="app">
     <div class="container">
-      <Header />
-      <TodoForm @add-todo="addTodo"/>
-      <TodoList   v-bind:todos="todos" 
+      <TodoListHeader />
+      <TodoForm @add-todo="addTodo"
+                @set-filter="setFilter"
+      />
+      <TodoListLoader v-if="loading"/>
+      <TodoList   v-else-if="todos.length"
+                  v-bind:todos="filteredTodos" 
                   @complete-todo="completeTodo" 
                   @remove-todo="removeTodo" 
                   @edit-todo="editTodo"
       />
+      <NoTodos v-else />
     </div>
   </div>
 </template>
 
-<script>
-import TodoForm from "@/components/TodoForm";
-import Header from "@/components/TodoListHeader";
-import TodoList from "@/components/TodoList";
+<script lang="ts">
+import Vue from 'vue';
+import TodoForm from "@/components/TodoForm.vue";
+import TodoListHeader from "@/components/TodoListHeader.vue";
+import TodoList from "@/components/TodoList.vue";
+import { Todo } from './types/todo';
+import { TodoEditData } from './types/todoEditData';
+import TodoListLoader from './components/TodoListLoader.vue';
+import NoTodos from './components/NoTodos.vue';
 
-export default {
+export default Vue.extend({
   name: 'App',
   components: {
-    Header, TodoForm, TodoList
-  },
+    TodoListHeader,
+    TodoForm,
+    TodoList,
+    TodoListLoader,
+    NoTodos
+},
   data() {
     return {
-      todos: []
+      todos: [] as Todo[],
+      filter: 'all',
+      loading: true
     }
   },
   mounted() {
     this.getData();
+  },
+  computed: {
+    filteredTodos() {
+      if (this.filter === 'completed') {
+        return this.todos.filter((todo: Todo) => todo.completed);
+      }
+      if (this.filter === 'uncompleted') {
+        return this.todos.filter((todo: Todo) => !todo.completed);
+      } 
+      return this.todos;
+    }
   },
   methods: {
     getData() {
@@ -36,9 +63,13 @@ export default {
         .then(response => response.json())
         .then(res => {
           this.todos = res.data;
+          // synthetic delay
+          setTimeout(() => {
+            this.loading = false;
+          }, 1000)
         })
     },
-    addTodo(todo) {
+    addTodo(todo: string) {
       fetch(('http://127.0.0.1:5000/tasks/add/'), {
             method: 'POST',
             headers: {
@@ -47,7 +78,7 @@ export default {
             body: JSON.stringify( { id: Date.now(), task: todo, completed: false })
             }).then(() => this.getData())
     },
-    completeTodo(todo) {
+    completeTodo(todo: Todo) {
         fetch((`http://127.0.0.1:5000/tasks/edit/${todo.id}/`), {
             method: 'POST',
             headers: {
@@ -57,13 +88,13 @@ export default {
         })
         .then(() => this.getData())
     },
-    removeTodo(id) {
+    removeTodo(id: number) {
         fetch((`http://127.0.0.1:5000/tasks/delete/${id}/`), {
             method: 'DELETE',
         }) 
         .then(() => this.getData()) 
     },
-    editTodo(taskToEdit) {
+    editTodo(taskToEdit: TodoEditData) {
         this.todos = this.todos.map(t => {
           if (t.id === taskToEdit.id) {
             t.task = taskToEdit.task;
@@ -78,9 +109,12 @@ export default {
             body: JSON.stringify({ task : taskToEdit.task})
         })
         .then(() => this.getData())
+    },
+    setFilter(value: string) {
+      this.filter = value;
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

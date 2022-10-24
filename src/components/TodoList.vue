@@ -46,8 +46,10 @@ export default Vue.extend({
 <style lang="scss">
 .todolist {
     @include flexCenter();
+    width: 60%;
+    margin: 0 auto;
     &__items {
-        min-width: 40%;
+        min-width: 100%;
     }
 }
 </style>

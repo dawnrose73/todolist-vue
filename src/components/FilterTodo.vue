@@ -26,7 +26,6 @@ export default Vue.extend({
 
 <style lang="scss">
 .filter-todos {
-    margin-left: 1rem;
     position: relative;
     overflow: hidden;
     height: 55px;
@@ -36,6 +35,7 @@ export default Vue.extend({
         background: #d88771;
         top: 0;
         right: 0;
+        height: 100%;
         pointer-events: none;
         padding: 1rem;
         transition: all 0.5s ease;

@@ -80,7 +80,7 @@ export default Vue.extend({
 
 <style lang="scss">
 .todo {
-    margin: 0.5rem;
+    margin-bottom: 0.5rem;
     background-color: $mainColor;
     color: $textColor;
     font-size: 1.5rem;

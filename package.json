@@ -37,7 +37,7 @@
   "lint-staged": {
     "**/*.{vue,ts}": [
       "prettier --write --ignore-unknown",
-      "npm run lint:write",
+      "npm run lint",
       "git add ."
     ]
   },

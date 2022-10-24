@@ -31,7 +31,7 @@
     "vue-template-compiler": "^2.6.14"
   },
   "lint-staged": {    
-    "*.(ts|vue)": ["npm run lint:", "git add"]  
+    "*.(ts|vue)": ["npm run lint", "git add"]  
   },
   "husky": {
     "hooks": {

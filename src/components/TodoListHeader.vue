@@ -11,8 +11,8 @@ export default Vue.extend({});
 
 <style lang="scss">
 .header {
-  font-size: 1.5rem;
-  min-height: 20vh;
-  @include flexCenter();
+    font-size: 1.5rem;
+    min-height: 20vh;
+    @include flexCenter();
 }
 </style>

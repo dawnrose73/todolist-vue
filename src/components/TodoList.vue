@@ -20,34 +20,34 @@ import { Todo } from "@/types/todo";
 import { TodoEditData } from "@/types/todoEditData";
 
 export default Vue.extend({
-  components: {
-    TodoItem
-  },
-  props: {
-    todos: {
-      type: Array as PropType<Todo[]>,
-      required: true
-    }
-  },
-  methods: {
-    completeTodo(todo: Todo) {
-      this.$emit("complete-todo", todo);
+    components: {
+        TodoItem
     },
-    removeTodo(id: number) {
-      this.$emit("remove-todo", id);
+    props: {
+        todos: {
+            type: Array as PropType<Todo[]>,
+            required: true
+        }
     },
-    editTodo(taskToEdit: TodoEditData) {
-      this.$emit("edit-todo", taskToEdit);
+    methods: {
+        completeTodo(todo: Todo) {
+            this.$emit("complete-todo", todo);
+        },
+        removeTodo(id: number) {
+            this.$emit("remove-todo", id);
+        },
+        editTodo(taskToEdit: TodoEditData) {
+            this.$emit("edit-todo", taskToEdit);
+        }
     }
-  }
 });
 </script>
 
 <style lang="scss">
 .todolist {
-  @include flexCenter();
-  &__items {
-    min-width: 40%;
-  }
+    @include flexCenter();
+    &__items {
+        min-width: 40%;
+    }
 }
 </style>

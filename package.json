@@ -24,16 +24,22 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^11.0.2",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^9.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "prettier": "2.7.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
     "typescript": "^4.8.4",
     "vue-template-compiler": "^2.6.14"
   },
   "lint-staged": {
-    "*.(ts|vue)": [ "npm run lint", "git add ." ]
+    "**/*": [
+      "npm run lint",
+      "prettier --write --ignore-unknown",
+      "git add ."
+    ]
   },
   "husky": {
     "hooks": {

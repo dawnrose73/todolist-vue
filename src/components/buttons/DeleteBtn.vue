@@ -1,9 +1,7 @@
 <template>
-    <button
-        class="delete-btn"
-        @click="$emit('remove-todo', todo.id)">
-        <TrashIcon />
-    </button>
+  <button class="delete-btn" @click="$emit('remove-todo', todo.id)">
+    <TrashIcon />
+  </button>
 </template>
 
 <script lang="ts">
@@ -16,9 +14,9 @@ export default Vue.extend({
   props: {
     todo: {
       type: Object as PropType<Todo>,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 });
 </script>
 

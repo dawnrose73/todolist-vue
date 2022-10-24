@@ -36,9 +36,8 @@
   },
   "lint-staged": {
     "**/*.{vue,ts}": [
-      "prettier --write --ignore-unknown",
       "npm run lint",
-      "git add ."
+      "prettier --write --ignore-unknown"
     ]
   },
   "husky": {

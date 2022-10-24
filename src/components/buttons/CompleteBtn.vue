@@ -1,6 +1,9 @@
 <template>
-    <button class="complete-btn" :disabled="isEdit" 
-        @click="$emit('complete-todo', todo)">
+    <button
+        class="complete-btn"
+        :disabled="isEdit" 
+        @click="$emit('complete-todo', todo)"
+    >
         <UndoIcon v-if="todo.completed" />
         <CheckIcon v-else />
     </button>

@@ -1,12 +1,12 @@
 <template>
-    <button
-        class="complete-btn"
-        :disabled="isEdit"
-        @click="$emit('complete-todo', todo)"
-    >
-        <UndoIcon v-if="todo.completed" />
-        <CheckIcon v-else />
-    </button>
+  <button
+    class="complete-btn"
+    :disabled="isEdit"
+    @click="$emit('complete-todo', todo)"
+  >
+    <UndoIcon v-if="todo.completed" />
+    <CheckIcon v-else />
+  </button>
 </template>
 
 <script lang="ts">
@@ -20,13 +20,13 @@ export default Vue.extend({
   props: {
     todo: {
       type: Object as PropType<Todo>,
-      required: true
+      required: true,
     },
     isEdit: {
       type: Boolean as PropType<boolean>,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 });
 </script>
 

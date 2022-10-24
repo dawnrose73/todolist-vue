@@ -1,12 +1,12 @@
 <template>
-    <button
-        class="edit-btn"
-        :disabled="todo.completed"
-        @click="(e) => edit(task, todo.id)"
-    >
-        <SaveIcon v-if="isEdit" />
-        <EditIcon v-else />
-    </button>
+  <button
+    class="edit-btn"
+    :disabled="todo.completed"
+    @click="(e) => edit(task, todo.id)"
+  >
+    <SaveIcon v-if="isEdit" />
+    <EditIcon v-else />
+  </button>
 </template>
 
 <script lang="ts">
@@ -21,16 +21,16 @@ export default Vue.extend({
   props: {
     todo: {
       type: Object as PropType<Todo>,
-      required: true
+      required: true,
     },
     isEdit: {
       type: Boolean as PropType<boolean>,
-      required: true
+      required: true,
     },
     task: {
       type: String as PropType<string>,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     edit(task: string, id: number) {
@@ -40,8 +40,8 @@ export default Vue.extend({
       } else {
         this.$emit("toggle-edit-mode");
       }
-    }
-  }
+    },
+  },
 });
 </script>
 

@@ -1,17 +1,10 @@
 <template>
-    <form
-        class="add-todo"
-        @submit.prevent="onSubmit">
-        <input
-            v-model="title"
-            class="add-todo__input"
-            type="text" >
-        <button
-            class="add-todo__btn"
-            type="submit">
-            <PlusIcon />
-        </button>
-    </form>
+  <form class="add-todo" @submit.prevent="onSubmit">
+    <input v-model="title" class="add-todo__input" type="text" />
+    <button class="add-todo__btn" type="submit">
+      <PlusIcon />
+    </button>
+  </form>
 </template>
 
 <script lang="ts">
@@ -22,7 +15,7 @@ export default Vue.extend({
   components: { PlusIcon },
   data() {
     return {
-      title: ""
+      title: "",
     };
   },
   methods: {
@@ -31,8 +24,8 @@ export default Vue.extend({
         this.$emit("add-todo", this.title);
         this.title = "";
       }
-    }
-  }
+    },
+  },
 });
 </script>
 

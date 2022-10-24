@@ -128,11 +128,11 @@ module.exports = {
     "comma-dangle": [
       "error",
       {
-        arrays: "never",
-        objects: "never",
-        imports: "never",
-        exports: "never",
-        functions: "never",
+        arrays: "always",
+        objects: "always",
+        imports: "always",
+        exports: "always",
+        functions: "always",
       },
     ],
   },

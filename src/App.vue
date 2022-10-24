@@ -1,20 +1,22 @@
 <template>
-  <div id="app">
-    <div class="container">
-      <TodoListHeader />
-      <TodoForm @add-todo="addTodo"
+    <div id="app">
+        <div class="container">
+            <TodoListHeader />
+            <TodoForm
+                @add-todo="addTodo"
                 @set-filter="setFilter"
-      />
-      <TodoListLoader v-if="loading"/>
-      <TodoList   v-else-if="todos.length"
-                  v-bind:todos="filteredTodos" 
-                  @complete-todo="completeTodo" 
-                  @remove-todo="removeTodo" 
-                  @edit-todo="editTodo"
-      />
-      <NoTodos v-else />
+            />
+            <TodoListLoader v-if="loading" />
+            <TodoList
+                v-else-if="todos.length"
+                :todos="filteredTodos" 
+                @complete-todo="completeTodo" 
+                @remove-todo="removeTodo" 
+                @edit-todo="editTodo"
+            />
+            <NoTodos v-else />
+        </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
@@ -43,9 +45,6 @@ export default Vue.extend({
       loading: true
     }
   },
-  mounted() {
-    this.getData();
-  },
   computed: {
     filteredTodos() {
       if (this.filter === 'completed') {
@@ -56,6 +55,9 @@ export default Vue.extend({
       } 
       return this.todos;
     }
+  },
+  mounted() {
+    this.getData();
   },
   methods: {
     getData() {
@@ -90,7 +92,7 @@ export default Vue.extend({
     },
     removeTodo(id: number) {
         fetch((`http://127.0.0.1:5000/tasks/delete/${id}/`), {
-            method: 'DELETE',
+            method: 'DELETE'
         }) 
         .then(() => this.getData()) 
     },

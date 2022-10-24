@@ -1,7 +1,7 @@
 <template>
     <div class="todo-form">
-        <AddTodo @add-todo="addTodo"/>
-        <FilterTodo @set-filter="setFilter"/>
+        <AddTodo @add-todo="addTodo" />
+        <FilterTodo @set-filter="setFilter" />
     </div>
 </template>
 
@@ -22,7 +22,7 @@ export default Vue.extend({
             this.$emit('set-filter', filter);
         }
     }
-})
+});
 </script>
 
 <style lang="scss">

@@ -1,11 +1,19 @@
 <template>
     <div class="filter-todos">
-        <select name="todos" 
-                class="filter-todos__filter" 
-                @change="setFilter">
-            <option value="all">All</option>
-            <option value="completed">Completed</option>
-            <option value="uncompleted">Uncompleted</option>
+        <select
+            name="todos" 
+            class="filter-todos__filter" 
+            @change="setFilter"
+        >
+            <option value="all">
+                All
+            </option>
+            <option value="completed">
+                Completed
+            </option>
+            <option value="uncompleted">
+                Uncompleted
+            </option>
         </select>
     </div>     
 </template>
@@ -19,7 +27,7 @@ export default Vue.extend({
             this.$emit('set-filter', (event.target as HTMLSelectElement).value);
         }
     }
-})
+});
 </script>
 
 <style lang="scss">

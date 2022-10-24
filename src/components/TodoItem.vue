@@ -1,28 +1,34 @@
 <template>
-    <li v-bind:class="todo.completed ? 'todo todo--completed' : 'todo'">
-        <input  v-if="isEdit" 
-                type="text" 
-                size="16" 
-                class="todo__input" 
-                v-model="task"
-        />    
-        <div    v-else
-                class="todo__task">
-            {{todo.task}}
+    <li :class="todo.completed ? 'todo todo--completed' : 'todo'">
+        <input
+            v-if="isEdit" 
+            v-model="task" 
+            type="text" 
+            size="16" 
+            class="todo__input"
+        >    
+        <div
+            v-else
+            class="todo__task"
+        >
+            {{ todo.task }}
         </div>                   
         <div class="todo__btns">
-            <CompleteBtn    v-bind:todo="todo"
-                            v-bind:isEdit="isEdit" 
-                            @complete-todo="completeTodo"
+            <CompleteBtn
+                :todo="todo"
+                :is-edit="isEdit" 
+                @complete-todo="completeTodo"
             />
-            <EditBtn    v-bind:todo="todo"
-                        v-bind:task="task"
-                        v-bind:isEdit="isEdit"
-                        @toggle-edit-mode="toggleEditMode"
-                        @edit-todo="editTodo"
+            <EditBtn
+                :todo="todo"
+                :task="task"
+                :is-edit="isEdit"
+                @toggle-edit-mode="toggleEditMode"
+                @edit-todo="editTodo"
             />
-            <DeleteBtn  v-bind:todo="todo"
-                        @remove-todo="removeTodo"
+            <DeleteBtn
+                :todo="todo"
+                @remove-todo="removeTodo"
             />
         </div>
     </li>
@@ -37,8 +43,14 @@ import { Todo } from "@/types/todo";
 import { TodoEditData } from "@/types/todoEditData";
 
 export default Vue.extend({
+    components: {
+        CompleteBtn, EditBtn, DeleteBtn
+    },
     props: {
-        todo: Object as PropType<Todo>
+        todo: {
+            type: Object as PropType<Todo>,
+            required: true
+        }
     },
     data() {
         return {
@@ -46,9 +58,6 @@ export default Vue.extend({
             task: this.todo.task
 
         }
-    },
-    components: {
-        CompleteBtn, EditBtn, DeleteBtn
     },
     methods: {
         editTodo(taskToEdit: TodoEditData) {
@@ -66,7 +75,7 @@ export default Vue.extend({
             this.isEdit = !this.isEdit;
         }
     }
-})
+});
 </script>
 
 <style lang="scss">

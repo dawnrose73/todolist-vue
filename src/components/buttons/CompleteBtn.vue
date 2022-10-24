@@ -1,7 +1,8 @@
 <template>
-    <button class="complete-btn" 
-            v-bind:disabled="isEdit" 
-            @click="$emit('complete-todo', todo)"
+    <button
+        class="complete-btn" 
+        :disabled="isEdit" 
+        @click="$emit('complete-todo', todo)"
     >
         <UndoIcon v-if="todo.completed" />
         <CheckIcon v-else />
@@ -15,12 +16,18 @@ import UndoIcon from "@/components/icons/UndoIcon.vue";
 import CheckIcon from "@/components/icons/CheckIcon.vue";
 
 export default Vue.extend({
+    components: { UndoIcon, CheckIcon },
     props: {
-        todo: Object as PropType<Todo>,
-        isEdit: Boolean as PropType<boolean>
-    },
-    components: { UndoIcon, CheckIcon }
-})
+        todo: {
+            type: Object as PropType<Todo>,
+            required: true
+        },        
+        isEdit: {
+            type: Boolean as PropType<boolean>,
+            required: true
+        }
+    }
+});
 </script>
 
 <style lang="scss">

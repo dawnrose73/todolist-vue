@@ -1,6 +1,7 @@
 <template>
-    <button class="delete-btn" 
-            @click="$emit('remove-todo', todo.id)"
+    <button
+        class="delete-btn" 
+        @click="$emit('remove-todo', todo.id)"
     >       
         <TrashIcon /> 
     </button>
@@ -12,11 +13,14 @@ import Vue, { PropType } from "vue";
 import TrashIcon from "@/components/icons/TrashIcon.vue";
 
 export default Vue.extend({
+    components: { TrashIcon },
     props: {
-        todo: Object as PropType<Todo>
-    },
-    components: { TrashIcon }
-})
+        todo: {
+            type: Object as PropType<Todo>,
+            required: true
+        }
+    }
+});
 </script>
 
 <style lang="scss">

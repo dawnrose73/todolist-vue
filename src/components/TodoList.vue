@@ -3,8 +3,8 @@
         <ul class="todolist__items">
             <TodoItem 
                 v-for="todo of todos" 
-                v-bind:todo="todo"
                 :key="todo.id"
+                :todo="todo"
                 @complete-todo="completeTodo"
                 @remove-todo="removeTodo"
                 @edit-todo="editTodo"
@@ -20,11 +20,14 @@ import { Todo } from "@/types/todo";
 import { TodoEditData } from "@/types/todoEditData";
 
 export default Vue.extend({
-    props: {
-        todos: Array as PropType<Todo[]>
-    },
     components: {
         TodoItem
+    },
+    props: {
+        todos: {
+            type: Array as PropType<Todo[]>,
+            required: true
+        }
     },
     methods: {
         completeTodo(todo: Todo) {
@@ -35,9 +38,9 @@ export default Vue.extend({
         },
         editTodo(taskToEdit: TodoEditData) {
             this.$emit('edit-todo', taskToEdit);
-        },
+        }
     }
-})
+});
 </script>
 
 <style lang="scss">

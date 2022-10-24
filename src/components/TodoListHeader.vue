@@ -1,8 +1,6 @@
 <template>
     <header class="header">
-        <h1 class="header__text">
-            Todolist
-        </h1>
+        <h1 class="header__text">Todolist</h1>
     </header>
 </template>
 
@@ -13,8 +11,8 @@ export default Vue.extend({});
 
 <style lang="scss">
 .header {
-    font-size: 1.5rem;
-    min-height: 20vh;
-    @include flexCenter();
+  font-size: 1.5rem;
+  min-height: 20vh;
+  @include flexCenter();
 }
 </style>

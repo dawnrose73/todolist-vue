@@ -35,9 +35,9 @@
     "vue-template-compiler": "^2.6.14"
   },
   "lint-staged": {
-    "**/*": [
-      "npm run lint",
+    "**/*.{vue,ts}": [
       "prettier --write --ignore-unknown",
+      "npm run lint:write",
       "git add ."
     ]
   },

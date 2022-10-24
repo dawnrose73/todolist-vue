@@ -1,16 +1,16 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
   extends: [
     "plugin:vue/strongly-recommended",
     "eslint:recommended",
     "@vue/typescript/recommended",
-    "prettier",
+    "prettier"
   ],
   parserOptions: {
-    parser: "@typescript-eslint/parser",
+    parser: "@typescript-eslint/parser"
   },
   rules: {
     "vue/attributes-order": [
@@ -27,21 +27,21 @@ module.exports = {
           "OTHER_DIRECTIVES",
           "OTHER_ATTR",
           "EVENTS",
-          "CONTENT",
+          "CONTENT"
         ],
-        alphabetical: false,
-      },
+        alphabetical: false
+      }
     ],
     "vue/max-attributes-per-line": [
       "error",
       {
         singleline: {
-          max: 1,
+          max: 1
         },
         multiline: {
-          max: 1,
-        },
-      },
+          max: 1
+        }
+      }
     ],
     "vue/html-self-closing": [
       "error",
@@ -49,11 +49,11 @@ module.exports = {
         html: {
           void: "never",
           normal: "always",
-          component: "always",
+          component: "always"
         },
         svg: "always",
-        math: "always",
-      },
+        math: "always"
+      }
     ],
     "vue/html-indent": [
       "error",
@@ -63,8 +63,8 @@ module.exports = {
         baseIndent: 1,
         closeBracket: 0,
         alignAttributesVertically: true,
-        ignores: [],
-      },
+        ignores: []
+      }
     ],
     "vue/no-irregular-whitespace": [
       "error",
@@ -74,16 +74,16 @@ module.exports = {
         skipRegExps: false,
         skipTemplates: false,
         skipHTMLAttributeValues: false,
-        skipHTMLTextContents: false,
-      },
+        skipHTMLTextContents: false
+      }
     ],
     "vue/component-definition-name-casing": ["error", "PascalCase"],
     "vue/match-component-file-name": [
       "error",
       {
         extensions: ["vue"],
-        shouldMatchCase: true,
-      },
+        shouldMatchCase: true
+      }
     ],
     "vue/order-in-components": [
       "error",
@@ -121,19 +121,19 @@ module.exports = {
           "LIFECYCLE_HOOKS",
           "methods",
           ["template", "render"],
-          "renderError",
-        ],
-      },
+          "renderError"
+        ]
+      }
     ],
     "comma-dangle": [
       "error",
       {
-        arrays: "always",
-        objects: "always",
-        imports: "always",
-        exports: "always",
-        functions: "always",
-      },
-    ],
-  },
+        arrays: "never",
+        objects: "never",
+        imports: "never",
+        exports: "never",
+        functions: "never"
+      }
+    ]
+  }
 };

@@ -1,42 +1,53 @@
 @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 100;
-    src:    local("Poppins"),
-            url("@/assets/fonts/Poppins-Thin.ttf") format("truetype");     
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 100;
+  src: local("Poppins"),
+    url("@/assets/fonts/Poppins-Thin.ttf") format("truetype");
 }
 @font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 200;
-    src:    local("Poppins"),
-            url("@/assets/fonts/Poppins-ExtraLight.ttf") format("truetype");     
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 200;
+  src: local("Poppins"),
+    url("@/assets/fonts/Poppins-ExtraLight.ttf") format("truetype");
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-  
+
 body {
-    background-image: -webkit-gradient(linear, left top, left bottom, from($backgroundColor1), to($backgroundColor2));
-    background-image: linear-gradient(180deg, $backgroundColor1, $backgroundColor2);
-    color: $mainColor;
-    font-family: "Poppins", sans-serif;
-    min-height: 100vh;
-    min-width: 100%;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from($backgroundColor1),
+    to($backgroundColor2)
+  );
+  background-image: linear-gradient(
+    180deg,
+    $backgroundColor1,
+    $backgroundColor2
+  );
+  color: $mainColor;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  min-width: 100%;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
-button, input {
-    outline: none;
-    border: none;
+button,
+input {
+  outline: none;
+  border: none;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }

@@ -1,29 +1,26 @@
 <template>
     <button class="delete-btn" 
             @click="$emit('remove-todo', todo.id)"
-    >        
-        <i class="fas fa-trash"></i>
+    >       
+        <TrashIcon /> 
     </button>
 </template>
 
 <script lang="ts">
 import { Todo } from "@/types/todo";
 import Vue, { PropType } from "vue";
+import TrashIcon from "@/components/icons/TrashIcon.vue";
 
 export default Vue.extend({
     props: {
         todo: Object as PropType<Todo>
-    }
+    },
+    components: { TrashIcon }
 })
 </script>
 
 <style lang="scss">
 .delete-btn {
-    @include baseBtnStyles;
-    background: $deleteColor;
-    &:hover {
-        background: $mainColor;
-        color: $deleteColor;
-    }
+    @include baseBtnStyles($mainColor, $deleteColor);
 }
 </style>

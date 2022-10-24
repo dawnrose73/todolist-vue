@@ -27,6 +27,7 @@ export default Vue.extend({
     margin-left: 1rem;
     position: relative;
     overflow: hidden;
+    height: 55px;
     &::after {
         content: "\25BC";
         position: absolute;
@@ -49,6 +50,7 @@ export default Vue.extend({
         color: #d88771;
         background: #ffffff;
         width: 10rem;
+        height: 100%;
         cursor: pointer;
         padding: 1.2rem;
     }

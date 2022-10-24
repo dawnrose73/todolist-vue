@@ -75,6 +75,7 @@ export default Vue.extend({
     background-color: $mainColor;
     color: $textColor;
     font-size: 1.5rem;
+    height: 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -97,6 +98,10 @@ export default Vue.extend({
     &--completed {
         text-decoration: line-through;
         opacity: 0.5;
-  }
+    }
+    &__btns {
+        height: 100%;
+        display: flex;
+    }
 }
 </style>

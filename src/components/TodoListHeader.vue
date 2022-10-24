@@ -14,8 +14,6 @@ export default Vue.extend({});
 .header {
     font-size: 1.5rem;
     min-height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter();
 }
 </style>

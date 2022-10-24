@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 100;
+    src:    local("Poppins"),
+            url("@/assets/fonts/Poppins-Thin.ttf") format("truetype");     
+}
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 200;
+    src:    local("Poppins"),
+            url("@/assets/fonts/Poppins-ExtraLight.ttf") format("truetype");     
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -20,10 +35,6 @@ ul {
 button, input {
     outline: none;
     border: none;
-}
-
-.fas {
-    pointer-events: none;
 }
 
 button {

@@ -28,8 +28,6 @@ export default Vue.extend({
 <style lang="scss">
 .todo-form {
     min-height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter();
 } 
 </style>

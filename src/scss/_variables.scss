@@ -7,9 +7,42 @@ $deleteColor: #ff6f47;
 $completeColor: #1bc23f;
 $editColor: #f2c541;
 
-@mixin baseBtnStyles {
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin baseBtnStyles($color, $background) {
     font-size: 1rem;
     padding: 1rem;
-    color: $mainColor;
+    height: 100%;
+    @include flexCenter();
     min-width: 50px;
+    background: $background;
+    transition: all 0.3s ease;
+    svg {
+        pointer-events: none;
+        max-height: 18px;
+        path {
+            fill: $color;
+        }
+    }
+    &:hover {
+        background: $color;
+        svg {
+            path {
+                fill: $background;
+            }
+        }
+    }
+    &:disabled:hover {
+        background: $background;
+        svg {
+            path {
+                fill: $color;
+            }
+        }
+    }
+
 }

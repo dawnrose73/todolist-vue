@@ -10,9 +10,7 @@ export default Vue.extend({})
 
 <style lang="scss">
 .no-todos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexCenter();
   font-size: 2rem;
 }
 </style>

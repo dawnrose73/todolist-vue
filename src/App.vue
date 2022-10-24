@@ -22,10 +22,10 @@ import Vue from 'vue';
 import TodoForm from "@/components/TodoForm.vue";
 import TodoListHeader from "@/components/TodoListHeader.vue";
 import TodoList from "@/components/TodoList.vue";
-import { Todo } from './types/todo';
-import { TodoEditData } from './types/todoEditData';
-import TodoListLoader from './components/TodoListLoader.vue';
-import NoTodos from './components/NoTodos.vue';
+import { Todo } from '@/types/todo';
+import { TodoEditData } from '@/types/todoEditData';
+import TodoListLoader from '@/components/TodoListLoader.vue';
+import NoTodos from '@/components/NoTodos.vue';
 
 export default Vue.extend({
   name: 'App',

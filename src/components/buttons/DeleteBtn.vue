@@ -1,7 +1,7 @@
 <template>
     <button
         class="delete-btn"
-        @click="$emit('remove-todo', todo.id)"
+        @click="() => removeTodo(todo.id)"
     >
         <TrashIcon />
     </button>
@@ -11,6 +11,7 @@
 import { Todo } from "@/types/todo";
 import Vue, { PropType } from "vue";
 import TrashIcon from "@/components/icons/TrashIcon.vue";
+import { eventBus } from "@/main";
 
 export default Vue.extend({
     components: { TrashIcon },
@@ -18,6 +19,11 @@ export default Vue.extend({
         todo: {
             type: Object as PropType<Todo>,
             required: true
+        }
+    },
+    methods: {
+        removeTodo(id: number) {
+            eventBus.$emit("remove-todo", id);
         }
     }
 });

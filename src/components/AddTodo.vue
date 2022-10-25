@@ -20,6 +20,7 @@
 <script lang="ts">
 import Vue from "vue";
 import PlusIcon from "@/components/icons/PlusIcon.vue";
+import { eventBus } from "@/main";
 
 export default Vue.extend({
     components: { PlusIcon },
@@ -31,7 +32,7 @@ export default Vue.extend({
     methods: {
         onSubmit() {
             if (this.title.trim()) {
-                this.$emit("add-todo", this.title);
+                eventBus.$emit("add-todo", this.title);
                 this.title = "";
             }
         }

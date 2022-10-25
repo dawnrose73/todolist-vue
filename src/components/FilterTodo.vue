@@ -13,12 +13,16 @@
 </template>
 
 <script lang="ts">
+import { eventBus } from "@/main";
 import Vue from "vue";
 
 export default Vue.extend({
     methods: {
         setFilter(event: Event) {
-            this.$emit("set-filter", (event.target as HTMLSelectElement).value);
+            eventBus.$emit(
+                "set-filter",
+                (event.target as HTMLSelectElement).value
+            );
         }
     }
 });

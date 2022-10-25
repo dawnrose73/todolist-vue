@@ -2,17 +2,11 @@
     <div id="app">
         <div class="container">
             <TodoListHeader />
-            <TodoForm
-                @add-todo="addTodo"
-                @set-filter="setFilter"
-            />
+            <TodoForm />
             <TodoListLoader v-if="loading" />
             <TodoList
                 v-else-if="todos.length"
                 :todos="filteredTodos"
-                @complete-todo="completeTodo"
-                @remove-todo="removeTodo"
-                @edit-todo="editTodo"
             />
             <NoTodos v-else />
         </div>
@@ -28,6 +22,7 @@ import { Todo } from "@/types/todo";
 import { TodoEditData } from "@/types/todoEditData";
 import TodoListLoader from "@/components/TodoListLoader.vue";
 import NoTodos from "@/components/NoTodos.vue";
+import { eventBus } from "./main";
 
 export default Vue.extend({
     name: "App",
@@ -56,6 +51,53 @@ export default Vue.extend({
             return this.todos;
         }
     },
+    created() {
+        eventBus.$on("complete-todo", (todo: Todo) => {
+            fetch(`http://127.0.0.1:5000/tasks/edit/${todo.id}/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ completed: !todo.completed })
+            }).then(() => this.getData());
+        }),
+            eventBus.$on("remove-todo", (id: number) => {
+                fetch(`http://127.0.0.1:5000/tasks/delete/${id}/`, {
+                    method: "DELETE"
+                }).then(() => this.getData());
+            }),
+            eventBus.$on("edit-todo", (taskToEdit: TodoEditData) => {
+                this.todos = this.todos.map((t) => {
+                    if (t.id === taskToEdit.id) {
+                        t.task = taskToEdit.task;
+                    }
+                    return t;
+                });
+                fetch(`http://127.0.0.1:5000/tasks/edit/${taskToEdit.id}/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ task: taskToEdit.task })
+                }).then(() => this.getData());
+            }),
+            eventBus.$on("add-todo", (todo: string) => {
+                fetch("http://127.0.0.1:5000/tasks/add/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: Date.now(),
+                        task: todo,
+                        completed: false
+                    })
+                }).then(() => this.getData());
+            }),
+            eventBus.$on("set-filter", (value: string) => {
+                this.filter = value;
+            });
+    },
     mounted() {
         this.getData();
     },
@@ -70,51 +112,6 @@ export default Vue.extend({
                         this.loading = false;
                     }, 1000);
                 });
-        },
-        addTodo(todo: string) {
-            fetch("http://127.0.0.1:5000/tasks/add/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    id: Date.now(),
-                    task: todo,
-                    completed: false
-                })
-            }).then(() => this.getData());
-        },
-        completeTodo(todo: Todo) {
-            fetch(`http://127.0.0.1:5000/tasks/edit/${todo.id}/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ completed: !todo.completed })
-            }).then(() => this.getData());
-        },
-        removeTodo(id: number) {
-            fetch(`http://127.0.0.1:5000/tasks/delete/${id}/`, {
-                method: "DELETE"
-            }).then(() => this.getData());
-        },
-        editTodo(taskToEdit: TodoEditData) {
-            this.todos = this.todos.map((t) => {
-                if (t.id === taskToEdit.id) {
-                    t.task = taskToEdit.task;
-                }
-                return t;
-            });
-            fetch(`http://127.0.0.1:5000/tasks/edit/${taskToEdit.id}/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ task: taskToEdit.task })
-            }).then(() => this.getData());
-        },
-        setFilter(value: string) {
-            this.filter = value;
         }
     }
 });

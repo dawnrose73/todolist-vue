@@ -17,19 +17,14 @@
             <CompleteBtn
                 :todo="todo"
                 :is-edit="isEdit"
-                @complete-todo="completeTodo"
             />
             <EditBtn
                 :todo="todo"
                 :task="task"
                 :is-edit="isEdit"
                 @toggle-edit-mode="toggleEditMode"
-                @edit-todo="editTodo"
             />
-            <DeleteBtn
-                :todo="todo"
-                @remove-todo="removeTodo"
-            />
+            <DeleteBtn :todo="todo" />
         </div>
     </li>
 </template>
@@ -40,7 +35,6 @@ import CompleteBtn from "@/components/buttons/CompleteBtn.vue";
 import EditBtn from "@/components/buttons/EditBtn.vue";
 import DeleteBtn from "@/components/buttons/DeleteBtn.vue";
 import { Todo } from "@/types/todo";
-import { TodoEditData } from "@/types/todoEditData";
 
 export default Vue.extend({
     components: {
@@ -61,16 +55,6 @@ export default Vue.extend({
         };
     },
     methods: {
-        editTodo(taskToEdit: TodoEditData) {
-            this.$emit("edit-todo", taskToEdit);
-            this.toggleEditMode();
-        },
-        completeTodo(todo: Todo) {
-            this.$emit("complete-todo", todo);
-        },
-        removeTodo(id: number) {
-            this.$emit("remove-todo", id);
-        },
         toggleEditMode() {
             this.isEdit = !this.isEdit;
         }

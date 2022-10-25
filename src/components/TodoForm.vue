@@ -26,4 +26,9 @@ export default Vue.extend({
     @include flexCenter();
     justify-content: space-between;
 }
+@media screen and (max-width: 800px) {
+    .todo-form {
+        flex-direction: column;
+    }
+}
 </style>

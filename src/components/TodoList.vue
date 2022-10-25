@@ -31,10 +31,17 @@ export default Vue.extend({
 <style lang="scss">
 .todolist {
     @include flexCenter();
-    width: 60%;
-    margin: 0 auto;
+    width: 100%;
+    padding-top: 20px;
     &__items {
-        min-width: 100%;
+        width: 60%;
+    }
+}
+@media screen and (max-width: 800px) {
+    .todolist {
+        &__items {
+            width: 80%;
+        }
     }
 }
 </style>

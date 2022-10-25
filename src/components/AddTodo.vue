@@ -45,6 +45,7 @@ export default Vue.extend({
     @include flexCenter();
     justify-content: flex-start;
     height: 55px;
+    max-height: 55px;
     flex: 1 auto;
     &__input {
         font-size: 1.5rem;

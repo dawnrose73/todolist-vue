@@ -51,8 +51,11 @@ export default Vue.extend({
     data() {
         return {
             isEdit: false,
-            task: this.todo.task
+            task: ""
         };
+    },
+    mounted() {
+        this.task = this.todo.task;
     },
     methods: {
         toggleEditMode() {

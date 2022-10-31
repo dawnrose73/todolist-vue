@@ -14,7 +14,6 @@ import { Todo } from "@/types/todo";
 import Vue, { PropType } from "vue";
 import UndoIcon from "@/components/icons/UndoIcon.vue";
 import CheckIcon from "@/components/icons/CheckIcon.vue";
-import { eventBus } from "@/main";
 
 export default Vue.extend({
     components: { UndoIcon, CheckIcon },
@@ -30,7 +29,7 @@ export default Vue.extend({
     },
     methods: {
         completeTodo(todo: Todo) {
-            eventBus.$emit("complete-todo", todo);
+            this.$store.dispatch("completeTodo", todo);
         }
     }
 });

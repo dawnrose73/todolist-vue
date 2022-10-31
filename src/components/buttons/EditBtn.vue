@@ -15,7 +15,6 @@ import { TodoEditData } from "@/types/todoEditData";
 import Vue, { PropType } from "vue";
 import SaveIcon from "@/components/icons/SaveIcon.vue";
 import EditIcon from "@/components/icons/EditIcon.vue";
-import { eventBus } from "@/main";
 
 export default Vue.extend({
     components: { SaveIcon, EditIcon },
@@ -37,7 +36,7 @@ export default Vue.extend({
         edit(task: string, id: number) {
             if (this.isEdit) {
                 const taskToEdit = { task, id } as TodoEditData;
-                eventBus.$emit("edit-todo", taskToEdit);
+                this.$store.dispatch("editTodo", taskToEdit);
             }
             this.$emit("toggle-edit-mode");
         }

@@ -11,7 +11,6 @@
 import { Todo } from "@/types/todo";
 import Vue, { PropType } from "vue";
 import TrashIcon from "@/components/icons/TrashIcon.vue";
-import { eventBus } from "@/main";
 
 export default Vue.extend({
     components: { TrashIcon },
@@ -23,7 +22,7 @@ export default Vue.extend({
     },
     methods: {
         removeTodo(id: number) {
-            eventBus.$emit("remove-todo", id);
+            this.$store.dispatch("removeTodo", id);
         }
     }
 });

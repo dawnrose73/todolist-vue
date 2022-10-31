@@ -3,10 +3,10 @@
         <div class="container">
             <TodoListHeader />
             <TodoForm />
-            <TodoListLoader v-if="loading" />
+            <TodoListLoader v-if="$store.getters.getLoading" />
             <TodoList
-                v-else-if="todos.length"
-                :todos="filteredTodos"
+                v-else-if="$store.getters.filteredTodos.length"
+                :todos="$store.getters.filteredTodos"
             />
             <NoTodos v-else />
         </div>
@@ -18,11 +18,8 @@ import Vue from "vue";
 import TodoForm from "@/components/TodoForm.vue";
 import TodoListHeader from "@/components/TodoListHeader.vue";
 import TodoList from "@/components/TodoList.vue";
-import { Todo } from "@/types/todo";
-import { TodoEditData } from "@/types/todoEditData";
 import TodoListLoader from "@/components/TodoListLoader.vue";
 import NoTodos from "@/components/NoTodos.vue";
-import { eventBus } from "./main";
 
 export default Vue.extend({
     name: "App",
@@ -33,86 +30,8 @@ export default Vue.extend({
         TodoListLoader,
         NoTodos
     },
-    data() {
-        return {
-            todos: [] as Todo[],
-            filter: "all",
-            loading: true
-        };
-    },
-    computed: {
-        filteredTodos() {
-            if (this.filter === "completed") {
-                return this.todos.filter((todo: Todo) => todo.completed);
-            }
-            if (this.filter === "uncompleted") {
-                return this.todos.filter((todo: Todo) => !todo.completed);
-            }
-            return this.todos;
-        }
-    },
-    created() {
-        eventBus.$on("complete-todo", (todo: Todo) => {
-            fetch(`http://127.0.0.1:5000/tasks/edit/${todo.id}/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ completed: !todo.completed })
-            }).then(() => this.getData());
-        }),
-            eventBus.$on("remove-todo", (id: number) => {
-                fetch(`http://127.0.0.1:5000/tasks/delete/${id}/`, {
-                    method: "DELETE"
-                }).then(() => this.getData());
-            }),
-            eventBus.$on("edit-todo", (taskToEdit: TodoEditData) => {
-                this.todos = this.todos.map((t) => {
-                    if (t.id === taskToEdit.id) {
-                        t.task = taskToEdit.task;
-                    }
-                    return t;
-                });
-                fetch(`http://127.0.0.1:5000/tasks/edit/${taskToEdit.id}/`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ task: taskToEdit.task })
-                }).then(() => this.getData());
-            }),
-            eventBus.$on("add-todo", (todo: string) => {
-                fetch("http://127.0.0.1:5000/tasks/add/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        id: Date.now(),
-                        task: todo,
-                        completed: false
-                    })
-                }).then(() => this.getData());
-            }),
-            eventBus.$on("set-filter", (value: string) => {
-                this.filter = value;
-            });
-    },
     mounted() {
-        this.getData();
-    },
-    methods: {
-        getData() {
-            fetch("http://127.0.0.1:5000/tasks/")
-                .then((response) => response.json())
-                .then((res) => {
-                    this.todos = res.data;
-                    // synthetic delay
-                    setTimeout(() => {
-                        this.loading = false;
-                    }, 1000);
-                });
-        }
+        this.$store.dispatch("fetchTodos");
     }
 });
 </script>
